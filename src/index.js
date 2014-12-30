@@ -19,3 +19,9 @@ import {Parser} from "./parser";
 export default function parse(code) {
   return new Parser(code).parseScript();
 }
+
+export function parseWithLocation(code) {
+  let parser = new Parser(code);
+  parser.markLocation = (node, location) => { node.startLocation = location; return node; };
+  return parser.parseScript();
+}
